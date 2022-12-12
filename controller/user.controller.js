@@ -106,16 +106,16 @@ const Order = async (req, res) => {
             quantity3,
             price3,
           ],
-          function(err,result){
-            if(err){
-                throw err;
+          function (err, result) {
+            if (err) {
+              throw err;
             }
             console.log(result);
-            id=result[0].id
+            id = result[0].id;
           }
         );
         res.status(200).json({
-          id:id,  
+          id: id,
           phonenumber: phonenumber,
           productname1: productname1,
           quantity1: quantity1,
@@ -150,4 +150,13 @@ const Paymentstat = async (req, res) => {
     }
   );
 };
-module.exports = { Login, Signup, Order, Paymentstat };
+const DisplayMenu = async (req, res) => {
+  await connection.query("select * from `menu` ", function (err, result) {
+    if (err) {
+      throw err;
+    } else {
+      res.json(result);
+    }
+  });
+};
+module.exports = { Login, Signup, Order, Paymentstat,DisplayMenu };
